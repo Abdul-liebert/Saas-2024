@@ -113,7 +113,9 @@ export default function Home() {
                   </TableCell>
                 </TableRow>
               ))}
+
             </TableBody>
+              <h1 className="text-xl font-bold text-gray-900">Input Data</h1>
             <TableFooter>
               <div className=" flex gap-2 ">
                 <Button className="mt-2" variant={"outline"}>
