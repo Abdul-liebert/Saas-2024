@@ -49,26 +49,26 @@ export default function SideNavbar({}: Props) {
             title: "Dashboard",
             icon: LayoutDashboard,
             variant: "default",
-            href: "/",
+            href: "/dashboard",
           },
           {
             title: "Drafts",
             icon: File,
             variant: "ghost",
-            href: "/Drafts",
+            href: "dashboard/drafts",
           },
           {
             title: "Sent",
             label: "",
             icon: Send,
             variant: "ghost",
-            href: "/Tasks",
+            href: "dashboard/tasks",
           },
           {
             title: "About",
             icon: Info,
             variant: "ghost",
-            href: "/about",
+            href: "dashboard/about",
           },
         ]}
       />
