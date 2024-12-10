@@ -1,6 +1,7 @@
+"use client";
+
 import PageTitle from "@/components/pagetitle";
 import { Card, CardProps, CardContent } from "@/components/ui/card";
-
 import { Boxes, Check, CirclePlus } from "lucide-react";
 import {
   Table,
@@ -12,14 +13,39 @@ import {
   TableRow,
   TableFooter,
 } from "@/components/ui/table";
-
 import { Button } from "@/components/ui/button";
-
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const router = useRouter(); // Hook untuk navigasi antar halaman
+
+  useEffect(() => {
+    // Cek apakah token ada di cookie
+    const token = document.cookie.replace(
+      /(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/,
+      "$1"
+    );
+
+    // Jika token ditemukan, set status login
+    if (token) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    // Hapus token dari cookie dan redirect ke halaman login
+    document.cookie = "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+    setIsLoggedIn(false);
+    router.push("/login"); // Redirect ke halaman login
+  };
+
   const cardData: CardProps[] = [
     {
       label: "Alat Kebersihan",
@@ -77,7 +103,20 @@ export default function Home() {
   return (
     <div>
       <PageTitle title="Dashboard" />
-      {/* <hr className="my-5 border-b-2 border-gray-800 rounded"/> */}
+
+      {/* Tombol Login/Logout */}
+      <div className="flex justify-end mb-4">
+        {isLoggedIn ? (
+          <Button variant={"outline"} onClick={handleLogout}>
+            Logout
+          </Button>
+        ) : (
+          <Button variant={"outline"} onClick={() => router.push("/login")}>
+            Login
+          </Button>
+        )}
+      </div>
+
       <section className=" grid w-full grid-cols-1 gap-4 gap-x-8 transition-all sm:grid-cols-2 lg:grid-cols-4">
         {cardData.map((d, i) => (
           <Card
@@ -113,9 +152,8 @@ export default function Home() {
                   </TableCell>
                 </TableRow>
               ))}
-
             </TableBody>
-              <h1 className="text-xl font-bold text-gray-900">Input Data</h1>
+            <h1 className="text-xl font-bold text-gray-900">Input Data</h1>
             <TableFooter>
               <div className=" flex gap-2 ">
                 <Button className="mt-2" variant={"outline"}>
@@ -130,18 +168,16 @@ export default function Home() {
             </TableFooter>
           </Table>
         </CardContent>
-        <CardContent className="w-1/2" >
-        <h1 className="text-xl font-bold text-gray-900">Input Data</h1>
+        <CardContent className="w-1/2">
+          <h1 className="text-xl font-bold text-gray-900">Input Data</h1>
           <div className="grid w-full max-w-sm items-center gap-1.5">
             <div>
-
-            <Label>Nama</Label>
-            <Input type="string" id="nama" placeholder="nama" />
+              <Label>Nama</Label>
+              <Input type="string" id="nama" placeholder="nama" />
             </div>
             <div>
-
-            <Label>Area</Label>
-            <Input type="string" id="area" placeholder="area" />
+              <Label>Area</Label>
+              <Input type="string" id="area" placeholder="area" />
             </div>
             <Button className="mt-2">Tambah</Button>
           </div>
