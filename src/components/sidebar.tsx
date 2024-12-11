@@ -4,21 +4,12 @@ import { Nav } from "./ui/nav";
 import { useRouter } from "next/navigation";
 
 
-type Props = {};
+// type Props = {};
 
 import {
   LayoutDashboard,
-  Archive,
-  ArchiveX,
   File,
-  Inbox,
-  MessagesSquare,
-  Search,
   Send,
-  ShoppingCart,
-  Trash2,
-  Users2,
-  ChevronFirst,
   LogOut,
   ChevronRight,
   Info,
@@ -27,7 +18,7 @@ import { Button } from "./ui/button";
 
 import { useWindowWidth } from "@react-hook/window-size";
 
-export default function SideNavbar({}: Props) {
+export default function SideNavbar() {
   const router = useRouter();
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
@@ -81,7 +72,7 @@ export default function SideNavbar({}: Props) {
             href: "/dashboard",
           },
           {
-            title: "Drafts",
+            title: "Resource",
             icon: File,
             variant: "ghost",
             href: "dashboard/data",
