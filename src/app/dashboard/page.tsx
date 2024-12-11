@@ -2,7 +2,7 @@
 
 import PageTitle from "@/components/pagetitle";
 import { Card, CardProps, CardContent } from "@/components/ui/card";
-import { Boxes, Check, CirclePlus } from "lucide-react";
+import { Boxes, Check, CirclePlus, Edit2, Trash } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -14,7 +14,6 @@ import {
   TableFooter,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useRouter } from "next/navigation";
@@ -22,16 +21,14 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-  const router = useRouter(); // Hook untuk navigasi antar halaman
+  const router = useRouter();
 
   useEffect(() => {
-    // Cek apakah token ada di cookie
     const token = document.cookie.replace(
       /(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/,
       "$1"
     );
 
-    // Jika token ditemukan, set status login
     if (token) {
       setIsLoggedIn(true);
     } else {
@@ -40,10 +37,60 @@ export default function Home() {
   }, []);
 
   const handleLogout = () => {
-    // Hapus token dari cookie dan redirect ke halaman login
     document.cookie = "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
     setIsLoggedIn(false);
-    router.push("/login"); // Redirect ke halaman login
+    router.push("/login");
+  };
+
+  type TableDataType = {
+    id: number;
+    nama: string;
+    area: string;
+    status: string;
+    tanggal: string;
+  };
+
+  const [tableData, setTableData] = useState<TableDataType[]>([]);
+  const [form, setForm] = useState({
+    id: null,
+    nama: "",
+    area: "",
+    tanggal: "",
+  });
+  const [editMode, setEditMode] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target;
+    setForm({ ...form, [id]: value });
+  };
+
+  const handleSubmit = () => {
+    if (!form.nama || !form.area || !form.tanggal) {
+      alert("Semua field wajib diisi!");
+      return;
+    }
+
+    if (editMode) {
+      setTableData((prev) =>
+        prev.map((item) => (item.id === form.id ? form : item))
+      );
+      setEditMode(false);
+    } else {
+      setTableData((prev) => [
+        ...prev,
+        { ...form, id: prev.length + 1, status: "Belum Selesai" },
+      ]);
+    }
+    setForm({ id: null, nama: "", area: "", tanggal: "" });
+  };
+
+  const handleDelete = (id: number) => {
+    setTableData((prev) => prev.filter((item) => item.id !== id));
+  };
+
+  const handleEdit = (data: typeof form) => {
+    setForm(data);
+    setEditMode(true);
   };
 
   const cardData: CardProps[] = [
@@ -73,51 +120,22 @@ export default function Home() {
     },
   ];
 
-  const tableData = [
-    {
-      id: 1,
-      nama: "Dalban",
-      area: "Ruang Kelas 12 & Labkom 1",
-      status: "Belum Selesai",
-    },
-    {
-      id: 2,
-      nama: "Ananda",
-      area: "Labkom 2 & Ruang Guru",
-      status: "Selesai",
-    },
-    {
-      id: 3,
-      nama: "Siti",
-      area: "Perpustakaan",
-      status: "Belum Selesai",
-    },
-    {
-      id: 3,
-      nama: "Siti",
-      area: "Perpustakaan",
-      status: "Belum Selesai",
-    },
-  ];
-
   return (
     <div>
       <PageTitle title="Dashboard" />
-
-      {/* Tombol Login/Logout */}
       <div className="flex justify-end mb-4">
         {isLoggedIn ? (
-          <Button variant={"outline"} onClick={handleLogout}>
+          <Button variant="outline" onClick={handleLogout}>
             Logout
           </Button>
         ) : (
-          <Button variant={"outline"} onClick={() => router.push("/login")}>
+          <Button variant="outline" onClick={() => router.push("/login")}>
             Login
           </Button>
         )}
       </div>
 
-      <section className=" grid w-full grid-cols-1 gap-4 gap-x-8 transition-all sm:grid-cols-2 lg:grid-cols-4">
+      <section className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {cardData.map((d, i) => (
           <Card
             key={i}
@@ -129,58 +147,86 @@ export default function Home() {
         ))}
       </section>
 
-      <section className="grid grid-cols-1 gap-4 transition-all mt-5 lg:grid-cols-2">
+      <section className="grid grid-cols-1 gap-4 mt-5 lg:grid-cols-2">
+        <CardContent className=" max-h-[300px]">
+          <h1 className="text-xl font-bold">Input Data</h1>
+          <div className="grid grid-cols-3 gap-4">
+            <div>
+              <Label>Nama</Label>
+              <Input
+                type="text"
+                id="nama"
+                placeholder="Nama"
+                value={form.nama}
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <Label>Area</Label>
+              <Input
+                type="text"
+                id="area"
+                placeholder="Area"
+                value={form.area}
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <Label>Tanggal</Label>
+              <Input
+                type="date"
+                id="tanggal"
+                placeholder="Tanggal"
+                value={form.tanggal}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+          <Button variant="outline" className="mt-4" onClick={handleSubmit}>
+            Add
+            <CirclePlus className="ml-2" />
+          </Button>
+        </CardContent>
+
         <CardContent>
-          <Table className="table-fixed">
-            {/* <TableCaption>Jadwal Piket</TableCaption> */}
+          <h1 className="text-xl font-bold">Jadwal Piket</h1>
+          <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="w-[5%]">No.</TableHead>
-                <TableHead className="w-[20%]">Nama</TableHead>
-                <TableHead className="w-[50%]">Area</TableHead>
-                <TableHead>Status</TableHead>
+                <TableHead>No.</TableHead>
+                <TableHead>Nama</TableHead>
+                <TableHead>Area</TableHead>
+                <TableHead>Tanggal</TableHead>
+                <TableHead>Aksi</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {tableData.map((data, index) => (
-                <TableRow key={data.id} className="align-middle">
-                  <TableCell className="font-medium">{index + 1}</TableCell>
+                <TableRow key={data.id}>
+                  <TableCell>{index + 1}</TableCell>
                   <TableCell>{data.nama}</TableCell>
                   <TableCell>{data.area}</TableCell>
-                  <TableCell className=" items-center gap-2">
-                    <Checkbox />
+                  <TableCell>{data.tanggal}</TableCell>
+                  <TableCell>
+                    <div className="flex gap-2">
+                      <Button
+                        variant="outline"
+                        onClick={() => handleEdit(data)}
+                      >
+                        <Edit2 />
+                      </Button>
+                      <Button
+                        variant="outline"
+                        onClick={() => handleDelete(data.id)}
+                      >
+                        <Trash />
+                      </Button>
+                    </div>
                   </TableCell>
                 </TableRow>
               ))}
             </TableBody>
-            <h1 className="text-xl font-bold text-gray-900">Input Data</h1>
-            <TableFooter>
-              <div className=" flex gap-2 ">
-                <Button className="mt-2" variant={"outline"}>
-                  Add
-                  <CirclePlus />
-                </Button>
-                <Button className="mt-2">
-                  Done
-                  <Check />
-                </Button>
-              </div>
-            </TableFooter>
           </Table>
-        </CardContent>
-        <CardContent className="w-1/2">
-          <h1 className="text-xl font-bold text-gray-900">Input Data</h1>
-          <div className="grid w-full max-w-sm items-center gap-1.5">
-            <div>
-              <Label>Nama</Label>
-              <Input type="string" id="nama" placeholder="nama" />
-            </div>
-            <div>
-              <Label>Area</Label>
-              <Input type="string" id="area" placeholder="area" />
-            </div>
-            <Button className="mt-2">Tambah</Button>
-          </div>
         </CardContent>
       </section>
     </div>
