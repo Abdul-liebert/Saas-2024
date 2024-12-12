@@ -75,20 +75,20 @@ export default function SideNavbar() {
             title: "Resource",
             icon: File,
             variant: "ghost",
-            href: "dashboard/data",
+            href: "/dashboard/data",
           },
           {
             title: "Sent",
             label: "",
             icon: Send,
             variant: "ghost",
-            href: "dashboard/tasks",
+            href: "/dashboard/tasks",
           },
           {
             title: "About",
             icon: Info,
             variant: "ghost",
-            href: "dashboard/about",
+            href: "/dashboard/about",
           },
         ]}
         

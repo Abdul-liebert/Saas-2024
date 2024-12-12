@@ -8,6 +8,13 @@ export type CardProps = {
   amount: string;
   description: string;
 };
+
+export type CardPropsImg = {
+  image: string; 
+  title: string; 
+  description: string
+};
+
 export function Card(props: CardProps) {
   return (
     <CardContent>
@@ -19,6 +26,16 @@ export function Card(props: CardProps) {
         <h2 className="text-4xl font-bold">{props.amount}</h2>
         <p className="text-sm text-gray-500">{props.description}</p>
       </section>
+    </CardContent>
+  );
+}
+
+export function CardWithImage(props: CardPropsImg) {
+  return (
+    <CardContent>
+      <img src={props.image} alt={props.title} className="w-full h-40 object-cover rounded-xl" />
+      <h2 className="mt-3 text-lg font-bold">{props.title}</h2>
+      <p className="text-sm text-gray-500">{props.description}</p>
     </CardContent>
   );
 }
