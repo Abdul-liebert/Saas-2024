@@ -48,7 +48,7 @@ export default function About({}: Props) {
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
             {/* Team Member Card */}
-            {["Alice", "Bob", "Charlie", "Diana"].map((name, index) => (
+            {["Aziz", "Syahban", "Ibrahim", "Hanif"].map((name, index) => (
               <div key={index} className="flex flex-col items-center">
                 <img
                   src={`/img/team-${index + 1}.jpg`} // Tambahkan gambar seperti team-1.jpg, team-2.jpg di folder public/img
@@ -56,7 +56,7 @@ export default function About({}: Props) {
                   className="w-32 h-32 rounded-full shadow-md object-cover mb-4"
                 />
                 <h3 className="text-xl font-semibold text-gray-700">{name}</h3>
-                <p className="text-gray-500">Position {index + 1}</p>
+                <p className="text-gray-500">Position Frontend</p>
               </div>
             ))}
           </div>
