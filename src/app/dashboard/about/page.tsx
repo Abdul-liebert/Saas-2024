@@ -15,7 +15,7 @@ export default function About({}: Props) {
           {/* Image Section */}
           <div className="flex justify-center">
             <img
-              src="/img/team.jpg" // Letakkan gambar di folder public/img/team.jpg
+              src="/img/team.png"
               alt="Our Team"
               className="rounded-xl shadow-lg object-cover h-80 w-full max-w-md"
             />
@@ -61,7 +61,7 @@ export default function About({}: Props) {
             {["Aziz", "Syahban", "Ibrahim", "Hanif"].map((name, index) => (
               <div key={index} className="flex flex-col items-center">
                 <img
-                  src={`/img/team-${index + 1}.jpg`} // Tambahkan gambar seperti team-1.jpg, team-2.jpg di folder public/img
+                  src={`/img/team-${index + 1}.png`}
                   alt={name}
                   className="w-32 h-32 rounded-full shadow-md object-cover mb-4"
                 />
