@@ -22,8 +22,9 @@ export default function RootLayout({
           inter.variable
         )}
       >
+
         {/* Layout ini hanya diterapkan untuk app/page.tsx */}
-        <div className="p-8">{children}</div>
+        <div className="">{children}</div>
       </body>
     </html>
   );

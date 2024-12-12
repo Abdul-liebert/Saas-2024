@@ -1,6 +1,4 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import TableCrud from "@/components/crudtable";
 import ShimmerButton from "@/components/ui/shimmer-button";
 import SparklesText from "@/components/ui/sparkles-text";
 import { useRouter } from "next/navigation";
@@ -16,7 +14,7 @@ import {
 } from "@/components/ui/table";
 
 import { useEffect, useState } from "react";
-import PageTitle from "@/components/pagetitle";
+
 
 
 
@@ -38,10 +36,9 @@ export default function HomePage() {
   }, []);
 
   const handleLogout = () => {
-    // Hapus token dari cookie dan redirect ke halaman login
     document.cookie = "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
     setIsLoggedIn(false);
-    router.push("/login"); // Redirect ke halaman login
+    router.push("/login");
   };
 
   const tableData = [
@@ -59,12 +56,6 @@ export default function HomePage() {
     },
   ];
   
-  const columns = [
-    { key: "id", label: "No." },
-    { key: "nama", label: "Nama" },
-    { key: "area", label: "Area" },
-    { key: "tanggal", label: "Tanggal" },
-  ];
   
 
   return (

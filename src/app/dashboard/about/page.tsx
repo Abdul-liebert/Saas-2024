@@ -1,9 +1,9 @@
 import PageTitle from "@/components/pagetitle";
 import React from "react";
 
-type Props = {};
 
-export default function About({}: Props) {
+
+export default function About() {
   return (
     <div className="min-h-screen shadow-2xl rounded-xl py-10">
       <PageTitle title="About" className="m-6" />
@@ -25,27 +25,24 @@ export default function About({}: Props) {
             <p className="text-lg">
               Selamat datang di Sistem Manajemen Piket, solusi cerdas untuk
               pengelolaan jadwal piket yang lebih terorganisir dan efisien.
-              Website ini dirancang untuk memudahkan koordinasi tugas harian,
-              memastikan setiap anggota tim memahami tanggung jawabnya, dan
-              menciptakan lingkungan kerja yang lebih produktif.
+              Website ini dirancang untuk memudahkan koordinasi piket harian,
+              memastikan setiap anggota tim melakukan tanggung jawabnya, dan
+              menciptakan lingkungan yang lebih tertib.
             </p>
             <p className="text-lg">
-              Dengan antarmuka yang ramah pengguna dan fitur-fitur canggih,
+              Dengan UI yang ramah pengguna dan fitur-fitur yang mudah dipahami,
               Sistem Manajemen Piket menawarkan:
               <br />
-              1. Penjadwalan Otomatis: Mengatur jadwal piket dengan mudah
+              1. Penjadwalan yang efisien: Mengatur jadwal piket dengan mudah
               berdasarkan kriteria tertentu.
               <br />
-              2. Notifikasi & Pengingat: Menginformasikan tugas harian agar
-              tidak ada yang terlewatkan.
-              <br />
-              3. Laporan Aktivitas: Melacak kinerja dan kehadiran untuk evaluasi
+              2. Laporan Aktivitas: Melacak kinerja dan kehadiran untuk evaluasi
               yang lebih baik.
               <br />
             </p>
             <p className="text-lg">
               Kami percaya bahwa pengelolaan tugas yang baik adalah kunci
-              keberhasilan tim. Dengan Sistem Manajemen Piket, Anda dapat fokus
+              keberhasilan tim. Dengan Sistem Manajemen Piket, user dapat fokus
               pada hal-hal yang lebih penting tanpa perlu khawatir tentang
               pengaturan jadwal.
             </p>
@@ -58,7 +55,7 @@ export default function About({}: Props) {
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
             {/* Team Member Card */}
-            {["Aziz", "Syahban", "Ibrahim", "Hanif"].map((name, index) => (
+            {["Ibrahim", "Aziz", "Syahban", "Hanif"].map((name, index) => (
               <div key={index} className="flex flex-col items-center">
                 <img
                   src={`/img/team-${index + 1}.png`}

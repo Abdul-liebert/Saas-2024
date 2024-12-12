@@ -1,26 +1,26 @@
 "use client";
 import PageTitle from "@/components/pagetitle";
 import { Card, CardProps, CardContent } from "@/components/ui/card";
-import { Boxes, Check, CirclePlus, Edit2, Trash, School, Clock4 , Clock5 } from "lucide-react";
+import { Boxes, Check, CirclePlus, Edit2,  School, Clock4 , Clock5 } from "lucide-react";
 import {
   Table,
   TableBody,
-  TableCaption,
+
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
-  TableFooter,
+
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Home() {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-  const router = useRouter();
+  // const router = useRouter();
 
   useEffect(() => {
     const token = document.cookie.replace(
@@ -35,11 +35,11 @@ export default function Home() {
     }
   }, []);
 
-  const handleLogout = () => {
-    document.cookie = "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-    setIsLoggedIn(false);
-    router.push("/login");
-  };
+  // const handleLogout = () => {
+  //   document.cookie = "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+  //   setIsLoggedIn(false);
+  //   router.push("/login");
+  // };
 
   type TableDataType = {
     id: number;
