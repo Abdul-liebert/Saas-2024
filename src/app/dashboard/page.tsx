@@ -2,7 +2,7 @@
 
 import PageTitle from "@/components/pagetitle";
 import { Card, CardProps, CardContent } from "@/components/ui/card";
-import { Boxes, Check, CirclePlus, Edit2, Trash } from "lucide-react";
+import { Boxes, Check, CirclePlus, Edit2, Trash, School, Clock4 , Clock5 } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -102,40 +102,29 @@ export default function Home() {
     },
     {
       label: "Ruangan",
-      icon: Boxes,
-      amount: "20",
-      description: "Dua Puluh",
+      icon: School,
+      amount: "7",
+      description: "Tujuh",
     },
     {
-      label: "Siswa",
-      icon: Boxes,
-      amount: "20",
-      description: "Dua Puluh",
+      label: "Waktu Mulai",
+      icon: Clock4,
+      amount: "16:00",
+      description: "*waktu dapat berubah jika ada keperluan",
     },
     {
-      label: "Alat Kebersihan",
-      icon: Boxes,
-      amount: "20",
-      description: "Dua Puluh",
+      label: "Waktu Selesai",
+      icon: Clock5,
+      amount: "17:00",
+      description: "*waktu dapat berubah jika ada keperluan",
     },
   ];
 
   return (
     <div>
       <PageTitle title="Dashboard" />
-      <div className="flex justify-end mb-4">
-        {isLoggedIn ? (
-          <Button variant="outline" onClick={handleLogout}>
-            Logout
-          </Button>
-        ) : (
-          <Button variant="outline" onClick={() => router.push("/login")}>
-            Login
-          </Button>
-        )}
-      </div>
 
-      <section className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <section className="grid w-full h-[200px] grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {cardData.map((d, i) => (
           <Card
             key={i}
@@ -216,10 +205,10 @@ export default function Home() {
                         <Edit2 />
                       </Button>
                       <Button
-                        variant="outline"
+                        variant="default"
                         onClick={() => handleDelete(data.id)}
                       >
-                        <Trash />
+                        <Check />
                       </Button>
                     </div>
                   </TableCell>

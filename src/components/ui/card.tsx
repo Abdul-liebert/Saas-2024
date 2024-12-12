@@ -29,7 +29,7 @@ export function CardContent(props: React.HTMLAttributes<HTMLDivElement>) {
       {...props}
       className={cn(
         "flex w-full flex-col gap-3 rounded-xl border p-5 shadow",
-        "min-h-[200px] flex-grow", // Tambahkan min-h dan flex-grow
+        "min-h-[100px] flex-grow", // Tambahkan min-h dan flex-grow
         props.className
       )}
     />
