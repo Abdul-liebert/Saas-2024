@@ -1,5 +1,4 @@
 "use client";
-
 import PageTitle from "@/components/pagetitle";
 import { Card, CardProps, CardContent } from "@/components/ui/card";
 import { Boxes, Check, CirclePlus, Edit2, Trash, School, Clock4 , Clock5 } from "lucide-react";
@@ -50,7 +49,9 @@ export default function Home() {
     tanggal: string;
   };
 
-  const [tableData, setTableData] = useState<TableDataType[]>([]);
+  const [tableActionData, setTableActionData] = useState<TableDataType[]>([]); // Tabel pertama
+  const [tableHistoryData, setTableHistoryData] = useState<TableDataType[]>([]); // Tabel kedua
+
   const [form, setForm] = useState({
     id: null,
     nama: "",
@@ -70,29 +71,30 @@ export default function Home() {
       return;
     }
 
+    const newEntry = { ...form, id: Date.now(), status: "Belum Selesai" };
+
     if (editMode) {
-      setTableData((prev) =>
-        prev.map((item) => (item.id === form.id ? form : item))
-      );
+      setTableActionData((prev) => prev.map((item) => (item.id === form.id ? newEntry : item)));
       setEditMode(false);
     } else {
-      setTableData((prev) => [
-        ...prev,
-        { ...form, id: prev.length + 1, status: "Belum Selesai" },
-      ]);
+      setTableActionData((prev) => [...prev, newEntry]);
     }
+
+    // Data selalu masuk ke histori
+    setTableHistoryData((prev) => [...prev, newEntry]);
+
+    // Reset form
     setForm({ id: null, nama: "", area: "", tanggal: "" });
   };
 
   const handleDelete = (id: number) => {
-    setTableData((prev) => prev.filter((item) => item.id !== id));
+    setTableActionData((prev) => prev.filter((item) => item.id !== id));
   };
 
   const handleEdit = (data: typeof form) => {
     setForm(data);
     setEditMode(true);
   };
-
   const cardData: CardProps[] = [
     {
       label: "Alat Kebersihan",
@@ -137,7 +139,7 @@ export default function Home() {
       </section>
 
       <section className="grid grid-cols-1 gap-4 mt-5 lg:grid-cols-2">
-        <CardContent className=" max-h-[300px]">
+        <CardContent className=" max-h-[400px] rounded-lg">
           <h1 className="text-xl font-bold">Input Data</h1>
           <div className="grid grid-cols-3 gap-4">
             <div>
@@ -171,14 +173,7 @@ export default function Home() {
               />
             </div>
           </div>
-          <Button variant="outline" className="mt-4" onClick={handleSubmit}>
-            Add
-            <CirclePlus className="ml-2" />
-          </Button>
-        </CardContent>
 
-        <CardContent>
-          <h1 className="text-xl font-bold">Jadwal Piket</h1>
           <Table>
             <TableHeader>
               <TableRow>
@@ -190,7 +185,7 @@ export default function Home() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {tableData.map((data, index) => (
+              {tableActionData.map((data, index) => (
                 <TableRow key={data.id}>
                   <TableCell>{index + 1}</TableCell>
                   <TableCell>{data.nama}</TableCell>
@@ -212,6 +207,35 @@ export default function Home() {
                       </Button>
                     </div>
                   </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+          <Button variant="outline" className="mt-4" onClick={handleSubmit}>
+            Add
+            <CirclePlus className="ml-2" />
+          </Button>
+        </CardContent>
+
+        <CardContent>
+          <h1 className="text-xl font-bold">Jadwal Piket</h1>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>No.</TableHead>
+                <TableHead>Nama</TableHead>
+                <TableHead>Area</TableHead>
+                <TableHead>Tanggal</TableHead>
+                <TableHead>Aksi</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+            {tableHistoryData.map((data, index) => (
+                <TableRow key={data.id}>
+                  <TableCell>{index + 1}</TableCell>
+                  <TableCell>{data.nama}</TableCell>
+                  <TableCell>{data.area}</TableCell>
+                  <TableCell>{data.tanggal}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

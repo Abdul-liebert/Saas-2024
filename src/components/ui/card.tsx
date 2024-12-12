@@ -17,14 +17,14 @@ export type CardPropsImg = {
 
 export function Card(props: CardProps) {
   return (
-    <CardContent>
+    <CardContent className="flex flex-col justify-between">
       <section className="flex justify-between">
-        <p className="text-sm">{props.label}</p>
+        <p className="text-md font-semibold">{props.label}</p>
         <props.icon className="h-6 w-6 text-gray-500"></props.icon>
       </section>
-      <section className="flex flex-col gap-1">
-        <h2 className="text-4xl font-bold">{props.amount}</h2>
-        <p className="text-sm text-gray-500">{props.description}</p>
+      <section className="flex flex-col gap-1 ">
+        <h2 className="text-5xl font-bold">{props.amount}</h2>
+        <p className="text-md text-gray-500">{props.description}</p>
       </section>
     </CardContent>
   );

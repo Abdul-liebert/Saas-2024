@@ -1,16 +1,15 @@
-import PageTitle from '@/components/pagetitle'
-import React from 'react'
+import PageTitle from "@/components/pagetitle";
+import React from "react";
 
-
-type Props = {}
+type Props = {};
 
 export default function About({}: Props) {
   return (
-    <div className="min-h-screen bg-gray-100 py-10">
-      <PageTitle title="About" />
+    <div className="min-h-screen shadow-2xl rounded-xl py-10">
+      <PageTitle title="About" className="m-6" />
       <div className="container mx-auto px-4">
         <h1 className="text-4xl font-bold text-center text-gray-800 mb-8">
-        Tentang Sistem Manajemen Piket
+          Tentang Sistem Manajemen Piket
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           {/* Image Section */}
@@ -24,20 +23,31 @@ export default function About({}: Props) {
           {/* Text Section */}
           <div className="text-gray-600 space-y-4">
             <p className="text-lg">
-            Selamat datang di Sistem Manajemen Piket, solusi cerdas untuk pengelolaan jadwal piket yang lebih terorganisir dan efisien. Website ini dirancang untuk memudahkan koordinasi tugas harian, memastikan setiap anggota tim memahami tanggung jawabnya, dan menciptakan lingkungan kerja yang lebih produktif.
+              Selamat datang di Sistem Manajemen Piket, solusi cerdas untuk
+              pengelolaan jadwal piket yang lebih terorganisir dan efisien.
+              Website ini dirancang untuk memudahkan koordinasi tugas harian,
+              memastikan setiap anggota tim memahami tanggung jawabnya, dan
+              menciptakan lingkungan kerja yang lebih produktif.
             </p>
             <p className="text-lg">
-            Dengan antarmuka yang ramah pengguna dan fitur-fitur canggih, Sistem Manajemen Piket menawarkan:
-            <br/>
-1.  Penjadwalan Otomatis: Mengatur jadwal piket dengan mudah berdasarkan kriteria tertentu.
-<br/>
-2.  Notifikasi & Pengingat: Menginformasikan tugas harian agar tidak ada yang terlewatkan.
-<br/>
-3.  Laporan Aktivitas: Melacak kinerja dan kehadiran untuk evaluasi yang lebih baik.
-<br/>
+              Dengan antarmuka yang ramah pengguna dan fitur-fitur canggih,
+              Sistem Manajemen Piket menawarkan:
+              <br />
+              1. Penjadwalan Otomatis: Mengatur jadwal piket dengan mudah
+              berdasarkan kriteria tertentu.
+              <br />
+              2. Notifikasi & Pengingat: Menginformasikan tugas harian agar
+              tidak ada yang terlewatkan.
+              <br />
+              3. Laporan Aktivitas: Melacak kinerja dan kehadiran untuk evaluasi
+              yang lebih baik.
+              <br />
             </p>
             <p className="text-lg">
-            Kami percaya bahwa pengelolaan tugas yang baik adalah kunci keberhasilan tim. Dengan Sistem Manajemen Piket, Anda dapat fokus pada hal-hal yang lebih penting tanpa perlu khawatir tentang pengaturan jadwal.
+              Kami percaya bahwa pengelolaan tugas yang baik adalah kunci
+              keberhasilan tim. Dengan Sistem Manajemen Piket, Anda dapat fokus
+              pada hal-hal yang lebih penting tanpa perlu khawatir tentang
+              pengaturan jadwal.
             </p>
           </div>
         </div>
@@ -63,5 +73,5 @@ export default function About({}: Props) {
         </div>
       </div>
     </div>
-  )
+  );
 }
