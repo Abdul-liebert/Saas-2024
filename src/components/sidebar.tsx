@@ -9,7 +9,6 @@ import { useRouter } from "next/navigation";
 import {
   LayoutDashboard,
   File,
-  Send,
   LogOut,
   ChevronRight,
   Info,

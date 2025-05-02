@@ -9,7 +9,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { CardContent, CardWithImage } from "@/components/ui/card";
-import { url } from "inspector";
+
 
 export default function Data() {
   const tableData = [

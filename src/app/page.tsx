@@ -5,12 +5,11 @@ import { useRouter } from "next/navigation";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
-  TableFooter,
+
 } from "@/components/ui/table";
 
 import { useEffect, useState } from "react";
