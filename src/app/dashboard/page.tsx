@@ -18,28 +18,9 @@ import { Label } from "@/components/ui/label";
 // import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function Home() {
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-  // const router = useRouter();
+export default function Home() {  
 
-  useEffect(() => {
-    const token = document.cookie.replace(
-      /(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/,
-      "$1"
-    );
-
-    if (token) {
-      setIsLoggedIn(true);
-    } else {
-      setIsLoggedIn(false);
-    }
-  }, []);
-
-  // const handleLogout = () => {
-  //   document.cookie = "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-  //   setIsLoggedIn(false);
-  //   router.push("/login");
-  // };
+  
 
   type TableDataType = {
     id: number;
